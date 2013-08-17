@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+DEVROOT='../caribou-development'
+TEMPLATE_ROOT='src/leiningen/new/caribou_template'
+
+rsync -av --safe-links --exclude $DEVROOT/target $DEVROOT/.gitignore $DEVROOT/app $DEVROOT/src $DEVROOT/project.clj $TEMPLATE_ROOT
+rsync -av --safe-links $DEVROOT/resources/ $TEMPLATE_ROOT/resources
+
+for CONFIGFILE in boot production staging development test
+do
+    sed -i '' 's/caribou_/{{sanitized}}_/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
+    sed -i '' 's/skel.controllers/{{name}}.controllers/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
+    sed -i '' 's/skel.hooks/{{name}}.hooks/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
+    sed -i '' 's/skel.fields/{{name}}.fields/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
+done
+
+sed -i '' 's/skel.hooks.model/{{name}}.hooks.model/g' $TEMPLATE_ROOT/src/skel/hooks/model.clj
+sed -i '' 's/skel.migrations.default/{{name}}.migrations.default/g' $TEMPLATE_ROOT/src/skel/migrations/default.clj
+sed -i '' 's/skel.migrations.admin/{{name}}.migrations.admin/g' $TEMPLATE_ROOT/src/skel/migrations/admin.clj
+sed -i '' 's/skel.migrations.order/{{name}}.migrations.order/g' $TEMPLATE_ROOT/src/skel/migrations/order.clj
+sed -i '' 's/skel.controllers/{{name}}.controllers/g' $TEMPLATE_ROOT/src/skel/controllers/home.clj
+sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/src/immutant/init.clj
+sed -i '' 's/skel.boot/{{name}}.boot/g' $TEMPLATE_ROOT/src/skel/boot.clj
+sed -i '' 's/skel.boot/{{name}}.boot/g' $TEMPLATE_ROOT/src/skel/core.clj
+sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/src/skel/core.clj
+
+sed -i '' 's/caribou-devsite/{{name}}/g' $TEMPLATE_ROOT/project.clj
+sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/project.clj
+sed -i '' 's/skel.migrations/{{name}}.migrations/g' $TEMPLATE_ROOT/project.clj
+sed -i '' 's/caribou-development-frontend/{{name}}-frontend/g' $TEMPLATE_ROOT/project.clj
+
+sed -i '' 's/my-test/{{name}}/g' $TEMPLATE_ROOT/resources/templates/home.html
+sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/templates/home.html
+
