@@ -12,10 +12,10 @@
     (main/info (str "Generating new Caribou project called " name))
     (->files data
              ["project.clj" (render "project.clj" data)]
-             ["src/immutant/init.clj" (render "src/immutant/init.clj" data)]
              ["src/{{sanitized}}/boot.clj" (render "src/skel/boot.clj" data)]
              ["src/{{sanitized}}/routes.clj" (render "src/skel/routes.clj" data)]
              ["src/{{sanitized}}/core.clj" (render "src/skel/core.clj" data)]
+             ["src/{{sanitized}}/immutant.clj" (render "src/skel/immutant.clj" data)]
              ["src/{{sanitized}}/controllers/home.clj" (render "src/skel/controllers/home.clj" data)]
              ["src/{{sanitized}}/hooks/model.clj" (render "src/skel/hooks/model.clj" data)]
              ["src/{{sanitized}}/migrations/admin.clj" (render "src/skel/migrations/admin.clj" data)]
