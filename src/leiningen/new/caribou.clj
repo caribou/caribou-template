@@ -1,14 +1,27 @@
 (ns leiningen.new.caribou
   (:require [leiningen.new.templates :refer [renderer name-to-path ->files]]
-            [leiningen.core.main :as main]))
+            [leiningen.core.main :as main]
+            [clojure.string :as string]))
 
-(def render (renderer "caribou-template"))
+(def pool "abcdefghijklmnopqrstuvwxyz0123456789")
+
+(defn rand-str
+  ([n] (rand-str n pool))
+  ([n pool]
+     (string/join
+      (map
+       (fn [_]
+         (rand-nth pool))
+       (repeat n nil)))))
+
+(def render (renderer "caribou"))
 
 (defn caribou
   "Generates a new Caribou project"
   [name]
   (let [data {:name name
-              :sanitized (name-to-path name)}]
+              :sanitized (name-to-path name)
+              :session-key (rand-str 32)}]
     (main/info (str "Generating new Caribou project called " name))
     (->files data
              ["project.clj" (render "project.clj" data)]
@@ -30,6 +43,7 @@
              ["resources/public/css/{{name}}.css" (render "resources/public/css/skel.css" data)]
              ["resources/cljs/{{name}}.cljs" (render "resources/cljs/skel.cljs" data)]
              ["app/assets/.gitignore" (render "app/assets/.gitignore")]
+             [".gitignore" (render ".gitignore")]
              ["resources/public/favicon.ico" (render "resources/public/favicon.ico")]
              ["resources/public/css/fonts/caribou.eot" (render "resources/public/css/fonts/caribou.eot")]
              ["resources/public/css/fonts/caribou.svg" (render "resources/public/css/fonts/caribou.svg")]

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 DEVROOT='../caribou-development'
-TEMPLATE_ROOT='src/leiningen/new/caribou_template'
+TEMPLATE_ROOT='src/leiningen/new/caribou'
 
 rsync -av --safe-links --exclude target $DEVROOT/.gitignore $DEVROOT/app $DEVROOT/src $DEVROOT/project.clj $TEMPLATE_ROOT
-rsync -av --safe-links --exclude public/js/out $DEVROOT/resources/ $TEMPLATE_ROOT/resources
+rsync -av --safe-links --exclude public/js/app $DEVROOT/resources/ $TEMPLATE_ROOT/resources
 
 for CONFIGFILE in production staging development test
 do
@@ -21,11 +21,12 @@ sed -i '' 's/skel.migrations.order/{{name}}.migrations.order/g' $TEMPLATE_ROOT/s
 sed -i '' 's/skel.controllers/{{name}}.controllers/g' $TEMPLATE_ROOT/src/skel/controllers/home.clj
 sed -i '' 's/skel.immutant/{{name}}.immutant/g' $TEMPLATE_ROOT/src/skel/immutant.clj
 sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/src/skel/immutant.clj
-sed -i '' 's/skel.boot/{{name}}.boot/g' $TEMPLATE_ROOT/src/skel/boot.clj
+sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/src/skel/boot.clj
 sed -i '' 's/skel.routes/{{name}}.routes/g' $TEMPLATE_ROOT/src/skel/routes.clj
 sed -i '' 's/skel.boot/{{name}}.boot/g' $TEMPLATE_ROOT/src/skel/core.clj
 sed -i '' 's/skel.routes/{{name}}.routes/g' $TEMPLATE_ROOT/src/skel/core.clj
 sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/src/skel/core.clj
+sed -i '' 's/REPLACEMEWITHAREALSESSIONCOOKIE!/{{session-key}}/g' $TEMPLATE_ROOT/src/skel/core.clj
 
 sed -i '' 's/caribou-development/{{name}}/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/project.clj

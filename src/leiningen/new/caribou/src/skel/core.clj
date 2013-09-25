@@ -69,6 +69,7 @@
     (caribou/with-caribou config
       (reload-pages)
       (repl/repl-init)
+      (cljs/brepl-init)
       (def handler
         (-> (handler/handler reload-pages)
             (provide-helpers)
@@ -89,7 +90,7 @@
             (wrap-content-type)
             (cljs/wrap-cljs)
             (handler/wrap-caribou config)
-            (wrap-session)
+            (wrap-session {:store (cookie-store {:key "{{session-key}}"})})
             (wrap-cookies))))))
 
 ;; ^^^^^^^^^^
