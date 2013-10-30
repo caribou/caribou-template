@@ -1,7 +1,8 @@
 (ns leiningen.new.caribou
   (:require [leiningen.new.templates :refer [renderer name-to-path ->files]]
             [leiningen.core.main :as main]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [clojure.java.io :as io]))
 
 (def pool "abcdefghijklmnopqrstuvwxyz0123456789")
 
@@ -45,10 +46,10 @@
              ["app/assets/.gitignore" (render "app/assets/.gitignore")]
              [".gitignore" (render ".gitignore")]
              ["resources/public/favicon.ico" (render "resources/public/favicon.ico")]
-             ["resources/public/css/fonts/caribou.eot" (render "resources/public/css/fonts/caribou.eot")]
-             ["resources/public/css/fonts/caribou.svg" (render "resources/public/css/fonts/caribou.svg")]
-             ["resources/public/css/fonts/caribou.ttf" (render "resources/public/css/fonts/caribou.ttf")]
-             ["resources/public/css/fonts/caribou.woff" (render "resources/public/css/fonts/caribou.woff")]
+             ["resources/public/img/caribou-logo.png" (io/input-stream (io/resource "public/img/caribou-logo.png"))]
+             ["resources/public/img/favicon.png" (io/input-stream (io/resource "public/img/favicon.png"))]
+             ["resources/public/img/instrument.svg" (render "resources/public/img/instrument.svg")]
+             ["resources/public/img/teepee_golden.svg" (render "resources/public/img/teepee_golden.svg")]
              ["resources/templates/errors/404.html" (render "resources/templates/errors/404.html")]
              ["resources/templates/errors/500.html" (render "resources/templates/errors/500.html")])))
 

@@ -6,6 +6,8 @@ TEMPLATE_ROOT='src/leiningen/new/caribou'
 rsync -av --safe-links --exclude target $DEVROOT/.gitignore $DEVROOT/app $DEVROOT/src $DEVROOT/project.clj $TEMPLATE_ROOT
 rsync -av --safe-links --exclude public/js/app $DEVROOT/resources/ $TEMPLATE_ROOT/resources
 
+rsync -av $TEMPLATE_ROOT/resources/ resources
+
 for CONFIGFILE in production staging development test
 do
     sed -i '' 's/caribou_/{{sanitized}}_/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
