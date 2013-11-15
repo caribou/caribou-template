@@ -1,8 +1,8 @@
 /caribou-index
 /app/assets
 /checkouts
-caribou_development.h2.db
-caribou_development.trace.db
+{{name}}_development.h2.db
+{{name}}_development.trace.db
 /target
 /resources/public/js/app/
 pom.xml
