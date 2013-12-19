@@ -8,4 +8,5 @@
             :database     "{{sanitized}}_production"
             :user         "postgres"
             :password     "postgres"}
- :asset-dir      "assets"}
+ :controller {:namespace "{{name}}.controllers" :reload :never}
+ :cache-templates :always}

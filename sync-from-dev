@@ -3,7 +3,7 @@
 DEVROOT='../caribou-development'
 TEMPLATE_ROOT='src/leiningen/new/caribou'
 
-rsync -av --safe-links --exclude target $DEVROOT/.gitignore $DEVROOT/app $DEVROOT/src $DEVROOT/project.clj $TEMPLATE_ROOT
+rsync -av --safe-links --exclude target --exclude app/assets $DEVROOT/.gitignore $DEVROOT/app $DEVROOT/src $DEVROOT/project.clj $TEMPLATE_ROOT
 rsync -av --safe-links --exclude public/js/app $DEVROOT/resources/ $TEMPLATE_ROOT/resources
 
 rsync -av $TEMPLATE_ROOT/resources/ resources
@@ -14,6 +14,7 @@ do
     sed -i '' 's/skel.controllers/{{name}}.controllers/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
     sed -i '' 's/skel.hooks/{{name}}.hooks/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
     sed -i '' 's/skel.fields/{{name}}.fields/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
+    sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/config/$CONFIGFILE.clj
 done
 
 sed -i '' 's/skel.hooks.model/{{name}}.hooks.model/g' $TEMPLATE_ROOT/src/skel/hooks/model.clj
@@ -31,12 +32,12 @@ sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/src/skel/core.clj
 sed -i '' 's/REPLACEMEWITHAREALSESSIONCOOKIE!/{{session-key}}/g' $TEMPLATE_ROOT/src/skel/core.clj
 
 sed -i '' 's/caribou-development/{{name}}/g' $TEMPLATE_ROOT/project.clj
+sed -i '' 's/caribou-development-frontend/{{name}}-frontend/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/skel.migrations/{{name}}.migrations/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/skel.immutant/{{name}}.immutant/g' $TEMPLATE_ROOT/project.clj
-sed -i '' 's/caribou-development-frontend/{{name}}-frontend/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/skel.js/{{name}}.js/g' $TEMPLATE_ROOT/project.clj
 
 sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/templates/home.html
-sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/cljs/skel.cljs
-
+sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/cljs/skel/core.cljs
+sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/cljs/skel/connect.cljs

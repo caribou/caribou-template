@@ -1,5 +1,5 @@
-(ns {{name}}
-  (:require [{{name}}.connect :as connect]))
+(ns skel.core
+  (:require [skel.connect :as connect]))
 
 (defn log
   [s]

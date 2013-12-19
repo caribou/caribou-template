@@ -1,4 +1,4 @@
-(ns {{name}}
+(ns {{name}}.core
   (:require [{{name}}.connect :as connect]))
 
 (defn log
