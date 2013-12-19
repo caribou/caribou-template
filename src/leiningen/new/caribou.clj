@@ -22,7 +22,7 @@
   [name]
   (let [data {:name name
               :sanitized (name-to-path name)
-              :session-key (rand-str 32)}]
+              :session-key (rand-str 16)}]
     (main/info (str "Generating new Caribou project called " name))
     (->files data
              ["project.clj" (render "project.clj" data)]
