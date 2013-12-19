@@ -35,6 +35,7 @@ sed -i '' 's/skel.core/{{name}}.core/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/skel.migrations/{{name}}.migrations/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/skel.immutant/{{name}}.immutant/g' $TEMPLATE_ROOT/project.clj
 sed -i '' 's/caribou-development-frontend/{{name}}-frontend/g' $TEMPLATE_ROOT/project.clj
+sed -i '' 's/skel.js/{{name}}.js/g' $TEMPLATE_ROOT/project.clj
 
 sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/templates/home.html
 sed -i '' 's/skel/{{name}}/g' $TEMPLATE_ROOT/resources/cljs/skel.cljs

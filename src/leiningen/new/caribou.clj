@@ -44,6 +44,7 @@
              ["resources/public/js/{{name}}.js" (render "resources/public/js/skel.js" data)]
              ["resources/public/css/{{name}}.css" (render "resources/public/css/skel.css" data)]
              ["resources/cljs/{{name}}.cljs" (render "resources/cljs/skel.cljs" data)]
+             ["resources/cljs/connect.cljs" (render "resources/cljs/connect.cljs" data)]
              ["resources/public/favicon.ico" (render "resources/public/favicon.ico")]
              ["resources/public/img/caribou-logo.png" (io/input-stream (io/resource "public/img/caribou-logo.png"))]
              ["resources/public/img/favicon.png" (io/input-stream (io/resource "public/img/favicon.png"))]
