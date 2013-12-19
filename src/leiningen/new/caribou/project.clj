@@ -25,6 +25,6 @@
   :cljsbuild {:repl-listen-port 44994
               :builds
               [{:source-paths ["resources/cljs"]
-                :compiler {:output-to "resources/public/js/app/skel.js"
+                :compiler {:output-to "resources/public/js/out/{{name}}.js"
                            :optimizations :whitespace
                            :pretty-print true}}]})
