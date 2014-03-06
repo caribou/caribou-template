@@ -1,4 +1,4 @@
-(defproject caribou/lein-template "0.13.4"
+(defproject caribou/lein-template "0.14.0"
   :description "Leiningen template for generating Caribou sites"
   :url "http://github.com/caribou/caribou"
   :license {:name "Eclipse Public License"
